@@ -1,6 +1,8 @@
 extends base
 
 block contents 
+    if errorMessage 
+        span=errorMessage
     form(method="post") 
         input(type="text", placeholder="이름", name="name")
         input(type="text", placeholder="전화번호('-'없이 숫자만)", name="phoneNumber")
