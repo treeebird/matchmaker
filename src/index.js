@@ -4,6 +4,7 @@ import morgan from "morgan"
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
 import mongoose from "mongoose";
+import session from "express-session";
 
 const app = express();
 
@@ -26,6 +27,11 @@ app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
 app.use(morgan('tiny'));
 app.use(express.urlencoded({ extended : true}));
+app.use( session({
+  secret: "Hello",
+  resave: true,
+  saveUninitialized: true,
+}));
 app.use("/", globalRouter);
 app.use("/users", userRouter);
 app.listen(4000, console.log("Hello world"));

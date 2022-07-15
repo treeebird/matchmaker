@@ -1,4 +1,14 @@
 extends base
 
 block contents 
-    h1 Login
+    if errorMessage 
+        span=errorMessage
+    form(method="post") 
+        input(type="text", placeholder="전화번호 뒤 네자리", name="lastFourPhoneNumber")
+        input(type="password", placeholder="password", name="password")
+        input(type="submit")
+    
+    hr
+    div 
+        span Do you not account? 
+        a(href="/users/join") Create one now &rarr;

@@ -8,7 +8,8 @@ export const getJoin = (req, res) => {
 export const postJoin = async (req, res) => {
     const { name, phoneNumber, gender, password, password2, grade, age } = req.body;
     const pageTitle = "Join";
-    console.log(name, phoneNumber, password, grade, age);
+    const lastFourPhoneNumber = phoneNumber.substr(-4)
+    console.log(name, phoneNumber,lastFourPhoneNumber, password, grade, age);
 
     if (password !== password2) {
         res.status(400);
@@ -18,6 +19,7 @@ export const postJoin = async (req, res) => {
             await User.create({
             name,
             phoneNumber,
+            lastFourPhoneNumber,
             password,
             gender,
             grade,
@@ -32,4 +34,23 @@ export const postJoin = async (req, res) => {
     
 }
 
+export const getLogin = (req, res) => {
+    return res.render("login");
+}
+
+export const postLogin = async (req, res) => {
+    const pageTitle = "Login";
+     const { lastFourPhoneNumber, password} = req.body;
+     console.log(lastFourPhoneNumber, password);
+    const user = await User.findOne({lastFourPhoneNumber})
+     if(!user) {
+        return res.status(400).render("login", {pageTitle: "Login", errorMessage:"Account is not exist"})
+     }
+     const ok = await bcrypt.compare(password, user.password);
+
+     if(!ok) {
+        return res.render("login", { pageTitle: "Login", errorMessage: "비밀번호가 맞지 않습니다."});
+     }
+    return res.redirect("/");
+}
 
