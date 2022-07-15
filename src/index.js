@@ -4,7 +4,9 @@ import morgan from "morgan"
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
 import mongoose from "mongoose";
+import MongoStore from "connect-mongo";
 import session from "express-session";
+import { localsMiddleware } from "../localMiddleware";
 
 const app = express();
 
@@ -29,9 +31,17 @@ app.use(morgan('tiny'));
 app.use(express.urlencoded({ extended : true}));
 app.use( session({
   secret: "Hello",
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({mongoUrl: 'mongodb://localhost:27017/test'})
 }));
+app.use((req,res,next) => {
+  req.sessionStore.all((error, sessions) => {
+    console.log(sessions);
+    next();
+  });
+});
+app.use(localsMiddleware);
 app.use("/", globalRouter);
 app.use("/users", userRouter);
 app.listen(4000, console.log("Hello world"));

@@ -3,7 +3,13 @@ nav
          
         li  
             a(href="/") Home
-        li  
-            a(href="/users/login") Login
-        li
-            a(href="/users/join") Join
+        if loggedIn
+            li
+                a(href="/users/logout") Log Out 
+            li
+                a(href="/users/edit") #{loggedInUser.name} 의 프로필
+        else 
+            li  
+                a(href="/users/login") Login
+            li
+                a(href="/users/join") Join

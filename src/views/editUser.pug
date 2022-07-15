@@ -1,0 +1,45 @@
+extends base
+
+block contents 
+    if errorMessage 
+        span=errorMessage
+    form(method="post") 
+        input(type="text", placeholder="이름", name="name" value=loggedInUser.name)
+        input(type="text", placeholder="전화번호('-'없이 숫자만)", name="phoneNumber" value=loggedInUser.phoneNumber)
+        div 
+            input(type="radio", id="man", name="gender", value="man" checked=loggedInUser.gender == "man")
+            label(for="man") 남성
+            input(type="radio", id="woman", name="gender", value="woman" checked=loggedInUser.gender == "woman")
+            label(for="woman") 여성
+        p 급수를 입력하세요 
+            div
+                input(type="radio", id="gradeA", name="grade", value="A" checked=loggedInUser.grade == "A")
+                label(for="gradeA") A
+                input(type="radio", id="gradeB", name="grade", value="B" checked=loggedInUser.grade == "B")
+                label(for="gradeB") B
+                input(type="radio", id="gradeC", name="grade", value="C" checked=loggedInUser.grade == "C")
+                label(for="gradeC") C
+                input(type="radio", id="gradeD", name="grade", value="D" checked=loggedInUser.grade == "D")
+                label(for="gradeD") D
+                input(type="radio", id="gradeE", name="grade", value="E" checked=loggedInUser.grade == "E")
+                label(for="gradeE") E
+                input(type="radio", id="gradeX", name="grade", value="X" checked=loggedInUser.grade == "X")
+                label(for="gradeX") 없음
+        p 연령대를 입력하세요
+            div 
+                input(type="radio", id="age20", name="age", value=20 checked=loggedInUser.age == "20")
+                label(for="age20") 20 이하
+                input(type="radio", id="age30", name="age", value=30 checked=loggedInUser.age == "30")
+                label(for="age30") 30대 
+                input(type="radio", id="age40", name="age", value=40 checked=loggedInUser.age == "40")
+                label(for="age40") 40대
+                input(type="radio", id="age50", name="age", value=50 checked=loggedInUser.age == "50")
+                label(for="age50") 50대
+                input(type="radio", id="age60", name="age", value=60 checked=loggedInUser.age == "60")
+                label(for="age60") 60대 이상
+        input(type="submit")
+    
+    hr
+    div 
+        span Already have ac account?  
+        a(href="/users/login") Log in now &rarr;

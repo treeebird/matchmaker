@@ -51,6 +51,16 @@ export const postLogin = async (req, res) => {
      if(!ok) {
         return res.render("login", { pageTitle: "Login", errorMessage: "비밀번호가 맞지 않습니다."});
      }
+     req.session.loggedIn = true;
+     req.session.user = user;
     return res.redirect("/");
 }
 
+export const getEdit = (req, res) => {
+    return res.render("editUser", {pageTitle: "Edit Profile"})
+}
+
+export const logout = (req, res) => {
+    req.session.destroy();
+    return res.redirect("/");
+}
