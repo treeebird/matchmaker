@@ -3,6 +3,7 @@ import { send } from "express/lib/response";
 import morgan from "morgan"
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
+import clubRouter from "./routers/clubRouter";
 import mongoose from "mongoose";
 import MongoStore from "connect-mongo";
 import session from "express-session";
@@ -44,4 +45,5 @@ app.use((req,res,next) => {
 app.use(localsMiddleware);
 app.use("/", globalRouter);
 app.use("/users", userRouter);
+app.use("/clubs", clubRouter);
 app.listen(4000, console.log("Hello world"));
