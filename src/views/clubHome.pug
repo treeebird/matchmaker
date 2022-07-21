@@ -1,0 +1,7 @@
+extends base
+
+block contents 
+    if loggedIn 
+        ul
+            each club in loggedInUser.clubs 
+                li= club
