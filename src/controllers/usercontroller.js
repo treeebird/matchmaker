@@ -40,9 +40,8 @@ export const getLogin = (req, res) => {
 
 export const postLogin = async (req, res) => {
     const pageTitle = "Login";
-     const { lastFourPhoneNumber, password} = req.body;
-     console.log(lastFourPhoneNumber, password);
-    const user = await User.findOne({lastFourPhoneNumber})
+    const { lastFourPhoneNumber, password} = req.body;
+    const user = await User.findOne({lastFourPhoneNumber});
      if(!user) {
         return res.status(400).render("login", {pageTitle: "Login", errorMessage:"Account is not exist"})
      }

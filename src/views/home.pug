@@ -4,10 +4,12 @@ block contents
     h1 모두의민턴에 오신걸 환영합니다.
     br
     ul
-        li 루이뷔콕 &nbsp &nbsp
-            a(href="/clubs/luisvuicook/play")  입장
-            span &nbsp &nbsp
-            a(href="/clubs/luisvuicook/spectate") 관전
+        each club in clubs 
+            li= club.clubKoreanName 
+                span &nbsp &nbsp 
+                a(href=`/clubs/${club.id}/play`)  입장
+                span &nbsp &nbsp
+                a(href=`/clubs/${club.id}/spectate`) 관전
 
     a(href="#") 새로운 경기장에 입장하세요 &rarr;
      

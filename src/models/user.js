@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
   gender: { type: String },
   grade: { type: String },
   age: { type: String },
-  clubs: [{type: String }],
+  clubs: [{type: Object }],
   mmr: { type: Number, default: 1000},
 });
 

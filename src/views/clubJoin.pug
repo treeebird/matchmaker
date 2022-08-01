@@ -1,0 +1,9 @@
+extends base
+
+block contents 
+    if errorMessage 
+        span=errorMessage
+    form(method="post") 
+        input(type="text", placeholder="클럽한글이름", name="clubKoreanName")
+        input(type="text", placeholder="Club name in English", name="clubEnglishName")
+        input(type="submit")
