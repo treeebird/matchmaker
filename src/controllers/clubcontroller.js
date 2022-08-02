@@ -1,9 +1,13 @@
 import Club from "../models/club"; 
 import User from "../models/user";
 import Court from "../models/courtBoard";
+
+const enteredPlayer = [];
+const upcommingGames = [];
+var playClub = new Object();
 export const getPlay = async (req, res) => {
     const { id } = req.params;
-    const playClub = await Club.findById(id);
+    playClub = await Club.findById(id);
     const existCourt = await Court.exists({clubID: playClub._id});
     console.log(existCourt);
     if(!existCourt){
@@ -12,12 +16,22 @@ export const getPlay = async (req, res) => {
             clubID: playClub._id,
             players: req.session.user,
         });      
+        enteredPlayer.push(req.session.user);
         console.log("New court created!!");
     } else{
         console.log("There is no create");
     } 
-        const playerList = await Court.findOne({clubKoreanName: playClub.clubKoreanName});
-        return res.render("playground", {pageTitle: "Board", playClub, playerList});
+
+        return res.render("playground", {pageTitle: "Board", playClub, enteredPlayer, upcommingGames});
+}
+
+export const postPlay = async (req, res) => {
+    const { addPlayerName } = req.body;
+    console.log(addPlayerName);
+    const newPlayer = await User.findOne({name: addPlayerName})
+    enteredPlayer.push(newPlayer);
+    console.log(enteredPlayer);
+    return res.redirect(`/clubs/${playClub._id}/play`);
 }
 
 export const clubHome = (req, res) => {
@@ -57,4 +71,11 @@ export const clubPostJoin = async (req, res) => {
     } catch (error) {
         return res.status(400).send("club create fail");
         };
+}
+
+export const postAddplayer = (req, res) => {
+    const { addPlayer } = req.body;
+    upcommingGames.push(addPlayer);
+    console.log(upcommingGames);
+    return res.redirect(`/clubs/${playClub._id}/play`);
 }

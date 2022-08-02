@@ -1,10 +1,11 @@
 import express from "express";
-import { getPlay, clubHome, clubGetJoin, clubPostJoin } from "../controllers/clubcontroller";
+import { getPlay, clubHome, clubGetJoin, clubPostJoin, postPlay, postAddplayer, getAddPlayer } from "../controllers/clubcontroller";
 const clubRouter = express.Router();
 
 
 clubRouter.route("/join").get(clubGetJoin).post(clubPostJoin);
 clubRouter.route("/").get(clubHome);
-clubRouter.route("/:id/play").get(getPlay);
+clubRouter.route("/:id/play").get(getPlay).post(postPlay);
+clubRouter.route("/addPlayer").post(postAddplayer);
 
 export default clubRouter;

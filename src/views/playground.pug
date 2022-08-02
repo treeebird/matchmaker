@@ -4,13 +4,16 @@ block contents
     h1 #{playClub.clubKoreanName} 경기장 
     br
     ul
-        li 참가선수를 입력하세요 
+        each people in upcommingGames
+            li= people.name
 
     hr
     h1 참가선수
     ul
-        each player in playerList.players
-            li= player.name
+        each player in enteredPlayer
+            li 
+                form(action="/clubs/addPlayer", method="post") 
+                    button(type="submit", name="addPlayer", value=player) #{player.name}
 
     form(method="post")
         input(type="text",placeholder="추가할 선수를 입력하세요", name="addPlayerName")
