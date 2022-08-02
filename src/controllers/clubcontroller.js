@@ -17,7 +17,6 @@ export const getPlay = async (req, res) => {
         console.log("There is no create");
     } 
         const playerList = await Court.findOne({clubKoreanName: playClub.clubKoreanName});
-        console.log(playerList)
         return res.render("playground", {pageTitle: "Board", playClub, playerList});
 }
 
