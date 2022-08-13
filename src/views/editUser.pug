@@ -4,6 +4,8 @@ block contents
     if errorMessage 
         span=errorMessage
     form(method="post") 
+    label(for="avatar") Avatar 
+        input(type="file", id="avatar", accept="image/*")
         input(type="text", placeholder="이름", name="name" value=loggedInUser.name)
         input(type="text", placeholder="전화번호('-'없이 숫자만)", name="phoneNumber" value=loggedInUser.phoneNumber)
         div 

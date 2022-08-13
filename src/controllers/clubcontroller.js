@@ -2,9 +2,9 @@ import Club from "../models/club";
 import User from "../models/user";
 import Court from "../models/courtBoard";
 
-const enteredPlayer = [];
-const upcommingGames = [];
-var playClub = new Object();
+let enteredPlayer = [];
+let upcommingGames = new Array();
+let playClub = new Object();
 export const getPlay = async (req, res) => {
     const { id } = req.params;
     playClub = await Club.findById(id);
@@ -27,8 +27,16 @@ export const getPlay = async (req, res) => {
 
 export const postPlay = async (req, res) => {
     const { addPlayerName } = req.body;
+    if(addPlayerName==""){
+        return res.redirect(`/clubs/${playClub._id}/play`);
+
+    }
     console.log(addPlayerName);
-    const newPlayer = await User.findOne({name: addPlayerName})
+    const isExist = await User.exists({name: addPlayerName});
+    if(!isExist){
+        return res.render("playground", {pageTitle: "Board", playClub, enteredPlayer, upcommingGames, errorMasage: "일치하는 회원이름이 없습니다."})
+    }
+    const newPlayer = await User.findOne({name: addPlayerName});
     enteredPlayer.push(newPlayer);
     console.log(enteredPlayer);
     return res.redirect(`/clubs/${playClub._id}/play`);
@@ -75,7 +83,8 @@ export const clubPostJoin = async (req, res) => {
 
 export const postAddplayer = (req, res) => {
     const { addPlayer } = req.body;
-    upcommingGames.push(addPlayer);
+    const objAddPlayer = JSON.parse(addPlayer);
+    upcommingGames.push(objAddPlayer);
     console.log(upcommingGames);
     return res.redirect(`/clubs/${playClub._id}/play`);
 }
