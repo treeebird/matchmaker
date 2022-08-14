@@ -1,6 +1,5 @@
 import express from "express";
-import { append } from "express/lib/response";
-import { getJoin, postJoin, getLogin, postLogin, logout, getEdit } from "../controllers/usercontroller";
+import { getJoin, postJoin, getLogin, postLogin, logout, getEdit } from "../controllers/usercontroller.js";
 
 const userRouter = express.Router();
 

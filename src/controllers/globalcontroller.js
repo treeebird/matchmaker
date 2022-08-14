@@ -1,4 +1,4 @@
-import Club from "../models/club";
+import Club from "../models/club.js";
 
 export const home = async (req, res) => {
     if(req.session.loggedIn) {

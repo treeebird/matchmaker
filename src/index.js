@@ -1,13 +1,12 @@
 import express from "express";
-import { send } from "express/lib/response";
-import morgan from "morgan"
-import globalRouter from "./routers/globalRouter";
-import userRouter from "./routers/userRouter";
-import clubRouter from "./routers/clubRouter";
+import morgan from "morgan";
+import globalRouter from "./routers/globalRouter.js";
+import userRouter from "./routers/userRouter.js";
+import clubRouter from "./routers/clubRouter.js";
 import mongoose from "mongoose";
 import MongoStore from "connect-mongo";
 import session from "express-session";
-import { localsMiddleware } from "../localMiddleware";
+import { localsMiddleware } from "../localMiddleware.js";
 
 const app = express();
 

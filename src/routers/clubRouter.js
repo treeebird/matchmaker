@@ -1,5 +1,5 @@
 import express from "express";
-import { getPlay, clubHome, clubGetJoin, clubPostJoin, postPlay, postAddplayer, getAddPlayer } from "../controllers/clubcontroller";
+import { getPlay, clubHome, clubGetJoin, clubPostJoin, postPlay, postAddplayer  } from "../controllers/clubcontroller.js";
 const clubRouter = express.Router();
 
 

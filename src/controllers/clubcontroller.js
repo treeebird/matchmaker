@@ -1,6 +1,6 @@
-import Club from "../models/club"; 
-import User from "../models/user";
-import Court from "../models/courtBoard";
+import Club from "../models/club.js"; 
+import User from "../models/user.js";
+import Court from "../models/courtBoard.js";
 
 let enteredPlayer = [];
 let upcommingGames = new Array();
